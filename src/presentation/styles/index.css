@@ -216,6 +216,17 @@ a {
   cursor: pointer;
 }
 
+.custom-image-input input {
+  display: none;
+}
+
+.thumbnail-128x128 {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 .ml\:1 {
   margin-left: 1rem !important;
 }

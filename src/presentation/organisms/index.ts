@@ -1,3 +1,4 @@
 import Modal from "./modal";
+import CustomImageInput from "./custom-image-input";
 
-export { Modal };
+export { Modal, CustomImageInput };

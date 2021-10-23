@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { useBoolean } from "../../hooks";
-import { Modal } from "../organisms";
+import { CustomImageInput, Modal } from "../organisms";
 
 const TestModalTemplate = () => {
+  const [url, setUrl] = useState("http://via.placeholder.com/128x128/000");
+  const [image, setImage] = useState<File | null>(null);
   const { value, enable, disable } = useBoolean();
   const saveImage = () => {
-    // some logic to save the image...
-    disable();
+    if (image) {
+      disable();
+      const body = new FormData();
+      body.append("perfil", image);
+
+      fetch("http://www.minhaapi.com/upload/image", {
+        method: "POST",
+        body,
+      });
+    }
   };
 
   return (
@@ -13,20 +24,22 @@ const TestModalTemplate = () => {
       <h1>Test Update Image Modal</h1>
       <img
         onClick={enable}
-        className="circle clickable"
-        src="http://via.placeholder.com/128x128"
+        className="thumbnail-128x128 circle clickable"
+        src={url}
         alt=""
       />
 
       <Modal isOpen={value} onClose={disable}>
         <div className="card flow">
-          <figure>
-            <img
-              className="circle clickable"
-              src="http://via.placeholder.com/128x128"
-              alt=""
-            />
-          </figure>
+          <CustomImageInput
+            id="perfil"
+            name="perfil"
+            url={url}
+            onChange={([file]) => {
+              setUrl(URL.createObjectURL(file));
+              setImage(file);
+            }}
+          />
 
           <div className="line">
             <button onClick={saveImage} className="button">
