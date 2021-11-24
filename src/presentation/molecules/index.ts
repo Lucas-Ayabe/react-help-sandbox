@@ -1,3 +1,4 @@
-import Layout from "./Layout";
+import Layout from "./layout";
+import Material2Field from "./material-2-field";
 
-export { Layout };
+export { Layout, Material2Field };
